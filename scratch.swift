@@ -5,7 +5,7 @@
 //  Created by Louis Tur on 10/10/16.
 //  Copyright © 2016 C4Q. All rights reserved.
 //
-
+/*
 import UIKit
 
 class InstaCatTableViewController: UITableViewController {
@@ -13,24 +13,23 @@ class InstaCatTableViewController: UITableViewController {
     internal let instaCatJSONFileName: String = "InstaCats.json"
     internal var instaCats: [InstaCat] = []
     internal let instaCatEndpoint: String = "https://api.myjson.com/bins/254uw"
-    internal let catFactory = InstaCatFactory()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        catFactory.getInstaCats(apiEndpoint: instaCatEndpoint) { (fatCats: [InstaCat]?) in
+        self.getInstaCats(apiEndpoint: instaCatEndpoint) { (fatCats: [InstaCat]?) in
             if let cat = fatCats {
                 self.instaCats = cat
                 
                 DispatchQueue.main.async{
                     self.tableView.reloadData()
-                    //help reload data updates
                 }
                 
             }
         }
     }
-    /*
+    
+    
     //URL request
     //func URL request shouldn't return because closures take longer to get the data and load it into your output variables -- callback closures help avoid this?
     func getInstaCats(apiEndpoint: String, callback: @escaping ([InstaCat]?) -> Void) {
@@ -56,15 +55,14 @@ class InstaCatTableViewController: UITableViewController {
                     // 6. if we're able to get non-nil [InstaCat], set our variable and reload the data
                     //access data from this closure and update
                     if let allTheCats: [InstaCat] = InstaCatFactory.manager.getInstaCats(from: validData) {
+                        
+                        print(allTheCats)
                         callback(allTheCats)
-                        //gives data back from whatever obj its calling?
                     }
                 }
                 }.resume()
         }
     }
-    //why cant closure return [InstaCat]? --> because it's a void, and we can't decide on return value of dataTask method?? WHAT??
-    */
     
     
     
@@ -88,3 +86,4 @@ class InstaCatTableViewController: UITableViewController {
     
 }
 
+*/

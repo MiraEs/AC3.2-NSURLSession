@@ -11,9 +11,12 @@ import UIKit
 
 /// Used to create `[InstaCat]`
 class InstaCatFactory {
-
+    
+    /****/
     static let manager: InstaCatFactory = InstaCatFactory()
     private init() {}
+    //singleton?? static instance of a constance set to the class type, and only default init to private (no one can use this bc of private property)
+    
     
     
     /// Attempts to make `[InstaCat]` from the `Data` contained in a local file
@@ -31,7 +34,7 @@ class InstaCatFactory {
         return instaCatsAll
     }
     
-    
+    //fileprivates means these 2 functions can only be called from this file
     /// Gets the `URL` for a local file
     fileprivate func getResourceURL(from fileName: String) -> URL? {
         
@@ -92,5 +95,42 @@ class InstaCatFactory {
         
         return  nil
     }
+    /****/
+    
+    //MARK: - ***URL Session Requests (refactored from table biew controller
+    //REFACTORED
+    
+    func getInstaCats(apiEndpoint: String, callback: @escaping ([InstaCat]?) -> Void) {
+        if let validInstaCatEndpoint: URL = URL(string: apiEndpoint) {
+            
+            // 1. URLSession/Configuration
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+            
+            
+            // 2. dataTaskWithURL
+            session.dataTask(with: validInstaCatEndpoint) { (data: Data?, response: URLResponse?, error: Error?) in
+                
+                // 3. check for errors right away
+                if error != nil {
+                    print("Error encountered!: \(error!)")
+                }
+                
+                // 4. printing out the data
+                if let validData: Data = data {
+                    print(validData) // not of much use other than to tell us that data does exist
+                    
+                    // 5. reuse our code to make some cats from Data
+                    // 6. if we're able to get non-nil [InstaCat], set our variable and reload the data
+                    //access data from this closure and update
+                    if let allTheCats: [InstaCat] = InstaCatFactory.manager.getInstaCats(from: validData) {
+                        callback(allTheCats)
+                        //gives data back from whatever obj its calling?
+                    }
+                }
+                }.resume()
+        }
+    }
+    
     
 }
+
