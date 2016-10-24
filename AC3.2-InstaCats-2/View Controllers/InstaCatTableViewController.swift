@@ -26,11 +26,10 @@ class InstaCatTableViewController: UITableViewController {
                     self.tableView.reloadData()
                     //help reload data updates
                 }
-                
             }
         }
     }
-    /*
+    
     //URL request
     //func URL request shouldn't return because closures take longer to get the data and load it into your output variables -- callback closures help avoid this?
     func getInstaCats(apiEndpoint: String, callback: @escaping ([InstaCat]?) -> Void) {
@@ -64,13 +63,13 @@ class InstaCatTableViewController: UITableViewController {
         }
     }
     //why cant closure return [InstaCat]? --> because it's a void, and we can't decide on return value of dataTask method?? WHAT??
-    */
+    
     
     
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,4 +86,10 @@ class InstaCatTableViewController: UITableViewController {
     }
     
 }
+
+//Notes:
+/*
+ access enum rawValue = EnumName(rawValue: whateverNameParameter)
+ Use enum!
+ */
 
